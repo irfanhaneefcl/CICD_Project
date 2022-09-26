@@ -1,7 +1,5 @@
-FROM node:carbon
-WORKDIR /usr/src/app
-COPY package*.json ./
-RUN npm install
-COPY . .
+FROM tomcat:8.5.40
+COPY target/sampleapp.war /usr/local/tomcat/webapps
 EXPOSE 8080
-CMD [ "npm", "start" ]
+CMD /usr/local/tomcat/bin/catalina.sh run
+#
