@@ -4,31 +4,9 @@ stages {
     stage('compile') {
 	    steps { 
 		    echo 'compiling..'
-		    git url: 'https://github.com/irfanhaneefcl/samplejavaapp'
+		    git url: 'https://github.com/irfanhaneefcl/CICD_Project'
 		    sh script: '/opt/maven/bin/mvn compile'
 	    }
-    }
-    stage('codereview-pmd') {
-	    steps { 
-		    echo 'codereview..'
-		    sh script: '/opt/maven/bin/mvn -P metrics pmd:pmd'
-            }
-	    post {
-		    success {
-			    recordIssues enabledForFailure: true, tool: pmdParser(pattern: '**/target/pmd.xml')
-		    }
-	    }		
-    }
-    stage('unit-test') {
-	    steps {
-		    echo 'unittest..'
-		    sh script: '/opt/maven/bin/mvn test'
-	    }
-	    post {
-		    success {
-			    junit 'target/surefire-reports/*.xml'
-		    }
-	    }			
     }
     stage('package/build-war') {
 	    steps {
@@ -39,11 +17,11 @@ stages {
     stage('build & push docker image') {
 	    steps {
 		    sh 'cd $WORKSPACE'
-		    sh 'docker build --file Dockerfile --tag irfanhaneefcl/samplejavaapp:$BUILD_NUMBER .'
+		    sh 'docker build --file Dockerfile --tag irfanhaneefcl/CICD_Project:$BUILD_NUMBER .'
 		    withCredentials([string(credentialsId: 'DOCKER_HUB_LOGIN', variable: 'DOCKER_HUB_LOGIN')]) {
 			    sh "docker login -u irfanhaneefcl -p ${DOCKER_HUB_LOGIN}"
 		    }
-		    sh 'docker push irfanhaneefcl/samplejavaapp:$BUILD_NUMBER'
+		    sh 'docker push irfanhaneefcl/CICD_Project:$BUILD_NUMBER'
 	    }
     }
     stage('Deploy-QA') {
