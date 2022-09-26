@@ -5,13 +5,13 @@ stages {
 	    steps { 
 		    echo 'compiling..'
 		    git url: 'https://github.com/irfanhaneefcl/CICD_Project'
-		    sh script: '/opt/maven/bin/mvn compile'
+		    sh script: ':/usr/share/gradle build'
 	    }
     }
     stage('package/build-war') {
 	    steps {
 		    echo 'package......'
-		    sh script: '/opt/maven/bin/mvn package'	
+		    sh script: ':/usr/share/gradle package'	
 	    }		
     }
     stage('build & push docker image') {
