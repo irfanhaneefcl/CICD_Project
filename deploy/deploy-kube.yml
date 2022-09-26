@@ -3,28 +3,28 @@
   tasks: 
     - name: Deploying Application pods...
       shell: | 
-         if [ `kubectl get deployment | grep -v NAME | awk '{print $1}' | grep sampleapp | wc -l` -gt 0 ]; then  
+         if [ `kubectl get deployment | grep -v NAME | awk '{print $1}' | grep CICD_Project | wc -l` -gt 0 ]; then  
             echo "deleteing previous application deployment"
-            kubectl delete deployment `kubectl get deployment | grep -v NAME | awk '{print $1}' | grep sampleapp`
+            kubectl delete deployment `kubectl get deployment | grep -v NAME | awk '{print $1}' | grep CICD_Project`
             echo "creating new application deployment"
-            kubectl create deployment sampleapp --image=irfanhaneefcl/samplejavaapp:{{ build }}
+            kubectl create deployment CICD_Project --image=irfanhaneefcl/CICD_Project:{{ build }}
          else 
             echo "Deploying Sampleapp Application"
-            kubectl create deployment sampleapp --image=irfanhaneefcl/samplejavaapp:{{ build }}
+            kubectl create deployment CICD_Project --image=irfanhaneefcl/CICD_Project:{{ build }}
          fi
     - name: deploying service
       shell: |
-         if [ `kubectl get svc | grep sampleapp  | awk '{print $1}' | wc -l` -gt 0 ]; then
+         if [ `kubectl get svc | grep CICD_Project  | awk '{print $1}' | wc -l` -gt 0 ]; then
             echo "app service found, No actions taken"
-            #kubectl delete svc `kubectl get svc | grep sampleapp | awk '{print $1}'`
+            #kubectl delete svc `kubectl get svc | grep CICD_Project | awk '{print $1}'`
          else
             echo "Creating App Services"
-            kubectl expose deployment sampleapp --name sampleapp --type NodePort --port 80 --target-port 8080
+            kubectl expose deployment CICD_Project --name CICD_Project --type NodePort --port 80 --target-port 8080
          fi
     - name: increase replicas 
-      shell: kubectl scale deploy sampleapp --replicas=2
+      shell: kubectl scale deploy CICD_Project --replicas=2
       
     #- name: deploy app
-    #  shell: kubectl create deployment sampleapp --image=irfanhaneefcl/samplejavaapp:{{ build }}
+    #  shell: kubectl create deployment CICD_Project --image=irfanhaneefcl/CICD_Project:{{ build }}
     #- name: deploy service
-    #  shell: kubectl expose deployment sampleapp --name sampleapp --type NodePort --port 80 --target-port 8080
+    #  shell: kubectl expose deployment CICD_Project --name CICD_Project --type NodePort --port 80 --target-port 8080
