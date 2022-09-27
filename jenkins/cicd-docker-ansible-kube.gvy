@@ -4,7 +4,7 @@ stages {
     stage('compile') {
 	    steps { 
 		    echo 'compiling..'
-		    git url: 'https://github.com/irfanhaneefcl/CICD_Project'
+		    git url: 'https://github.com/irfanhaneefcl/cicd_maven'
 		    sh script: '/opt/maven/bin/mvn compile'
 	    }
     }
@@ -17,11 +17,11 @@ stages {
     stage('build & push docker image') {
 	    steps {
 		    sh 'cd $WORKSPACE'
-		    sh 'docker build --file Dockerfile --tag irfanhaneefcl/CICD_Project:$BUILD_NUMBER .'
+		    sh 'docker build --file Dockerfile --tag irfanhaneefcl/cicd_maven:$BUILD_NUMBER .'
 		    withCredentials([string(credentialsId: 'DOCKER_HUB_LOGIN', variable: 'DOCKER_HUB_LOGIN')]) {
 			    sh "docker login -u irfanhaneefcl -p ${DOCKER_HUB_LOGIN}"
 		    }
-		    sh 'docker push irfanhaneefcl/CICD_Project:$BUILD_NUMBER'
+		    sh 'docker push irfanhaneefcl/cicd_maven:$BUILD_NUMBER'
 	    }
     }
     stage('Deploy-QA') {
