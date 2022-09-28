@@ -121,7 +121,7 @@ Git Configuration in Jenkins console
     sudo service jenkins restart
 ```	
 
-> validate, run docker command with jenkins
+> **` validate, run docker command with jenkins`** 
 
 ```
 	su - jenkins           ## switch to jenkins user
