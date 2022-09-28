@@ -7,6 +7,7 @@
 
       login to the VM Install below tools
 ```
+![CICD-JPAC](https://github.com/lerndevops/labs/blob/master/cicd-flow/CICD-JPAC.png)
 
 ## Step2 -- `Install Java & Jenkins`
 ```
@@ -14,6 +15,7 @@ sudo wget https://raw.githubusercontent.com/lerndevops/labs/master/scripts/insta
 sudo chmod 755 /tmp/installJenkins.sh
 sudo bash /tmp/installJenkins.sh
 ```
+
 
 ## Step3 -- `Install Maven` 
 ```
@@ -175,4 +177,4 @@ Git Configuration in Jenkins console
 
 ```
 
-![CICD-JPAC](https://github.com/lerndevops/labs/blob/master/cicd-flow/CICD-JPAC.png)
+#![CICD-JPAC](https://github.com/lerndevops/labs/blob/master/cicd-flow/CICD-JPAC.png)
