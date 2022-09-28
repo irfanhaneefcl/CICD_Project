@@ -131,15 +131,10 @@ Git Configuration in Jenkins console
 
 ##### if the above commands execute without any error then we configured jenkins user properly 
 
-# Step11 -- `Setup Deployment Environments`
+## Step11 -- `Setup Deployment Environments`
 
 > **setup kubernetes cluster**
-
-
-> **`  # `Step1: On Master Node Only`**
-
-
-
+> **`  # `Step1: On Master Node`**
 > **`## Install Docker**
 ```
 sudo wget https://raw.githubusercontent.com/lerndevops/labs/master/scripts/installDocker.sh -P /tmp
@@ -147,14 +142,12 @@ sudo chmod 755 /tmp/installDocker.sh
 sudo bash /tmp/installDocker.sh
 sudo systemctl restart docker
 ```
-
 > **`## Install kubeadm,kubelet,kubectl**
 ```
 sudo wget https://raw.githubusercontent.com/lerndevops/labs/master/scripts/installK8S-v1-23.sh -P /tmp
 sudo chmod 755 /tmp/installK8S-v1-23.sh
 sudo bash /tmp/installK8S-v1-23.sh
 ```
-
 > **`## Initialize kubernetes Master Node**
  ```
    sudo kubeadm init --ignore-preflight-errors=all
@@ -168,14 +161,10 @@ sudo bash /tmp/installK8S-v1-23.sh
  > **`  ## below installs weave networking driver **
  ```    
    sudo kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')" 
- ```
-  > **` # Validate:  kubectl get nodes**
-
 ```
+> **` # Validate:  kubectl get nodes**
 
-> **`### `Step2: On All Worker Nodes`**
-
-
+> **`### `On All Worker Nodes`**
 > **`## Install Docker**
  ```
 sudo wget https://raw.githubusercontent.com/lerndevops/labs/master/scripts/installDocker.sh -P /tmp
@@ -183,14 +172,12 @@ sudo chmod 755 /tmp/installDocker.sh
 sudo bash /tmp/installDocker.sh
 sudo systemctl restart docker
 ```
-
 > **`## Install kubeadm,kubelet,kubectl**
 ```
 sudo wget https://raw.githubusercontent.com/lerndevops/labs/master/scripts/installK8S-v1-23.sh -P /tmp
 sudo chmod 755 /tmp/installK8S-v1-23.sh
 sudo bash /tmp/installK8S-v1-23.sh
 ```
-
 > **`## Run Below on Master Node to get join token **
 ```
 kubeadm token create --print-join-command 
@@ -203,6 +190,7 @@ kubeadm token create --print-join-command
 
 ## Step12 -- `Setup Ansible Inventory on Jenkins machine using CLI`
 ```
+
    vi /tmp/inv 
       enter your servers in groups like qa & prod 
    sudo chmod 755 /tmp/inv
