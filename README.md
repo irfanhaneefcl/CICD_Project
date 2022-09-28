@@ -131,12 +131,12 @@ Git Configuration in Jenkins console
 
 ##### if the above commands execute without any error then we configured jenkins user properly 
 
-## Step11 -- `Setup Deployment Environments`
+# Step11 -- `Setup Deployment Environments`
 
-> **setup atleast one docker swarm / kubernetes cluster**
+> **setup kubernetes cluster**
 
 ```
-  ### `Step1: On Master Node Only`
+  # `Step1: On Master Node Only`
 ```
 ## Install Docker
 
