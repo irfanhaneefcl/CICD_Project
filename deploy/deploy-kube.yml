@@ -7,10 +7,10 @@
             echo "deleteing previous application deployment"
             kubectl delete deployment `kubectl get deployment | grep -v NAME | awk '{print $1}' | grep eduproj`
             echo "creating new application deployment"
-            kubectl create deployment eduproj --image=irfanhaneefcl/cicd_maven:{{ build }}
+            kubectl create deployment eduproj --image=irfanhaneefcl/edureka_project2:{{ build }}
          else 
             echo "Deploying eduproj Application"
-            kubectl create deployment eduproj --image=irfanhaneefcl/cicd_maven:{{ build }}
+            kubectl create deployment eduproj --image=irfanhaneefcl/edureka_project2:{{ build }}
          fi
     - name: deploying service
       shell: |
@@ -25,6 +25,6 @@
       shell: kubectl scale deploy eduproj --replicas=2
       
     #- name: deploy app
-    #  shell: kubectl create deployment eduproj --image=irfanhaneefcl/cicd_maven:{{ build }}
+    #  shell: kubectl create deployment eduproj --image=irfanhaneefcl/edureka_project2:{{ build }}
     #- name: deploy service
-    #  shell: kubectl expose deployment eduproj --name sampleapp --type NodePort --port 80 --target-port 8080
+    #  shell: kubectl expose deployment eduproj --name eduproj --type NodePort --port 80 --target-port 8080
