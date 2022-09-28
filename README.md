@@ -56,9 +56,9 @@ host_key_checking = False
 
 > **hit `http://IP:8080` in browser   ## incase of cloud please use Public IP ensure the Port is allowed to access**
 
-```
-![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/8_jenkins_login.PNG)
 
+![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/8_jenkins_login.PNG)
+```
 	enter `initialAdminPassword` the page to login ( cat /var/lib/jenkins/secrets/initialAdminPassword )
 
 	click on `Install Suggested Plugins`
