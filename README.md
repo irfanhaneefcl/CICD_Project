@@ -8,7 +8,7 @@
       login to the VM Install below tools
       
 ```
-![VM-Conroller](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/1_jenkins_vm.PNG)
+![](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/1_jenkins_vm.PNG)
 
 ## Step2 -- `Install Java & Jenkins`
 ```
@@ -16,7 +16,8 @@ sudo wget https://raw.githubusercontent.com/lerndevops/labs/master/scripts/insta
 sudo chmod 755 /tmp/installJenkins.sh
 sudo bash /tmp/installJenkins.sh
 ```
-
+![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/2_java_install.PNG)
+![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/3_jenkins_install.PNG)
 
 ## Step3 -- `Install Maven` 
 ```
@@ -24,6 +25,7 @@ sudo wget https://raw.githubusercontent.com/lerndevops/labs/master/scripts/insta
 sudo chmod 755 /tmp/installMaven.sh
 sudo bash /tmp/installMaven.sh
 ```
+![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/4_maven_install.PNG)
 
 ## Step4 -- `Install Docker`
 ```
@@ -31,12 +33,15 @@ sudo wget https://raw.githubusercontent.com/lerndevops/labs/master/scripts/insta
 sudo chmod 755 /tmp/installDocker.sh
 sudo bash /tmp/installDocker.sh
 ```
+![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/5_docker_version.PNG)
 
 ## Step5 -- `Install Ansible`
 ```
 sudo wget https://raw.githubusercontent.com/lerndevops/labs/master/scripts/installAnsible.sh -P /tmp
 sudo chmod 755 /tmp/installAnsible.sh
 sudo bash /tmp/installAnsible.sh
+
+![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/6_ansible_install.PNG)
 
 # modify the ansible config file to ensure disable host key checking 
 
@@ -45,12 +50,15 @@ vi /etc/ansible/ansible.cfg
 # uncomment this to disable SSH key host checking
 host_key_checking = False
 ```
+![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/7_ansible_config.PNG)
 
 ## Step6 -- `Login to Jenkins UI`
 
 > **hit `http://IP:8080` in browser   ## incase of cloud please use Public IP ensure the Port is allowed to access**
 
 ```
+![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/8_jenkins_login.PNG)
+
 	enter `initialAdminPassword` the page to login ( cat /var/lib/jenkins/secrets/initialAdminPassword )
 
 	click on `Install Suggested Plugins`
@@ -69,6 +77,7 @@ install all these from Jenkins UI
   	4) Build Pipeline
   	5) Docker Piepeline
 ```
+![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/9_Jenkins_plugin_search_Install.PNG)
 
 ## Step8 -- `Create Credentials (Setup from Jenkins UI)`
 
@@ -81,6 +90,8 @@ install all these from Jenkins UI
 	--> ID: DOCKER_HUB_LOGIN 
 	--> Description: DOCKER_HUB_LOGIN
 ```
+![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/14_credentials_jenkins_config.PNG)
+
 ## Step9 -- `Configure JAVA - MAVEN - Git (Setup from Jenkins UI)`
 
 ```
@@ -90,6 +101,7 @@ Java configuration in Jenkins console
 		Name: myjava ( can be any string )
 		JAVA_HOME: /path/to/javahome ( ex: /usr/lib/jvm/java-8-openjdk-amd64 )
 ```
+![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/10_java_ jenkins_config.PNG)
 ```
 Maven Configuration in Jenkins console
 	
@@ -97,6 +109,7 @@ Maven Configuration in Jenkins console
 		Name: maven3.6 ( can be any string )
 		MAVEN_HOME: /path/to/mavenhome ( ex: /opt/apache-maven-3.6.5 )
 ```
+![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/11_maven_jenkins_config.PNG)
 ```
 Git Configuration in Jenkins console
 	
@@ -105,11 +118,16 @@ Git Configuration in Jenkins console
 		MAVEN_HOME: /path/to/githome ( ex: /usr/bin/git )
 ```
 
+![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/13_git_Jenkins_config.PNG)
+
 ## Step10 -- `configure Jenkins with Docker - from Jenkin Server CLI` 
+
 
 > by default Jenkins process runs with Jenkins User, which mean any jenkins Jobs we run from jenkins console will be running jenkins user on Jenkins machine
 
 > we need to configure Jenkins user can run the docker commands by adding jenkins user to docker group
+
+![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/12_docker_jenkins_config.PNG)
 
 ```
     sudo usermod -aG docker jenkins
@@ -128,6 +146,9 @@ Git Configuration in Jenkins console
 	docker ps              ## to list any containers running
 	docker pull nginx      ## pull a docker image 
 ```
+
+
+![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/15_config_jenkins_with_docker.PNG)
 
 ##### if the above commands execute without any error then we configured jenkins user properly 
 
@@ -168,6 +189,8 @@ sudo bash /tmp/installK8S-v1-23.sh
 
 >**`Validate:  kubectl get nodes`**
 
+![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/16_kube_master.PNG)
+
 > Step2: On All Worker Nodes
 
 > **`Install Docker`**
@@ -193,6 +216,9 @@ kubeadm token create --print-join-command
     copy the kubeadm join token from master & run it on all nodes
 ```
 
+![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/17_kube_worker1.PNG)
+![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/18_kube_cluster_nodes.PNG)
+
 ## Step12 -- `Setup Ansible Inventory on Jenkins machine using CLI`
 ```
    vi /etc/ansible/myinv 
@@ -201,16 +227,22 @@ kubeadm token create --print-join-command
    sudo chown jenkins:jenkins /etc/ansible/myinv
 ```
 
+![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/19_ansible_myinv.PNG)
+
 ## Step 13: Now Let's start creating CICD Pipeline Using Pipeline As Code Script
 
 > **`Jenkins ( home page )`** 
 
 ```
   --> Click on New Item from left menu 
-  --> Enter an item name: CICD-Pipeline 
+  --> Enter an item name: edureka_project
   --> Choose: Pipeline 
   --> Click: ok
 ```
+
+![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/20_jenkins_pipeline_setup_1.PNG)
+![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/21_jenkins_pipeline_setup_2.PNG)
+![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/22_jenkins_pipeline_setup_3.PNG)
 
 > **`insdie job parameters as below`**
 
@@ -218,12 +250,23 @@ kubeadm token create --print-join-command
 -->  Click on Pipeline (TAB) on top 
 -->  Definition (drop down): Pipeline Script from SCM
 -->  SCM (drop down): Git
--->  Repositories --> Repositories URL --> 
--->  Script Path: 
+-->  Repositories --> Repositories URL --> https://github.com/irfanhaneefcl/edureka_project2
+-->  Script Path: /jenkins/cicd-docker-ansible-kube.gvy
+
+![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/23_jenkinsfile.PNG)
+![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/24_dockerfile.PNG)
+![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/24_kube_deploy.PNG)
 	
 -->  Click on Save 
 -->  Build Now from left Menu 
 ```
+
+![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/25_jenkins_pipeline1.PNG)
+![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/26_Kube1.PNG)
+![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/27_replica5.PNG)
+![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/28_jenkins_build_replica.PNG)
+![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/29_kube_pods_view.PNG)
+![](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/30_application_view_in_browser.PNG)
 
 >**'Build Logs from Jenkins Console Output'**
 
@@ -460,5 +503,4 @@ PLAY RECAP *********************************************************************
 Finished: SUCCESS
 ```
 
-![](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/30_application_view_in_browser.PNG)
 
