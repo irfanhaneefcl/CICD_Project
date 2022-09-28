@@ -162,7 +162,7 @@ sudo bash /tmp/installK8S-v1-23.sh
    sudo mkdir -p $HOME/.kube
    sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
    sudo chown $(id -u):$(id -g) $HOME/.kube/config
-
+ ```
  > **`  ## install networking driver -- Weave/flannel/canal/calico etc... **
 
  > **`  ## below installs weave networking driver **
