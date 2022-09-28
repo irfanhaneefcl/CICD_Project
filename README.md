@@ -136,11 +136,11 @@ Git Configuration in Jenkins console
 > **setup kubernetes cluster**
 
 ```
-  # `Step1: On Master Node Only`
+> **`  # `Step1: On Master Node Only`**
 ```
 
 ```
-## Install Docker
+> **`## Install Docker**
 
 sudo wget https://raw.githubusercontent.com/lerndevops/labs/master/scripts/installDocker.sh -P /tmp
 sudo chmod 755 /tmp/installDocker.sh
@@ -148,14 +148,14 @@ sudo bash /tmp/installDocker.sh
 sudo systemctl restart docker
 ```
 ```
-## Install kubeadm,kubelet,kubectl
+> **`## Install kubeadm,kubelet,kubectl**
 
 sudo wget https://raw.githubusercontent.com/lerndevops/labs/master/scripts/installK8S-v1-23.sh -P /tmp
 sudo chmod 755 /tmp/installK8S-v1-23.sh
 sudo bash /tmp/installK8S-v1-23.sh
 ```
 ```
-## Initialize kubernetes Master Node
+> **`## Initialize kubernetes Master Node**
  
    sudo kubeadm init --ignore-preflight-errors=all
 
@@ -163,21 +163,21 @@ sudo bash /tmp/installK8S-v1-23.sh
    sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
    sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
-   ## install networking driver -- Weave/flannel/canal/calico etc... 
+ > **`  ## install networking driver -- Weave/flannel/canal/calico etc... **
 
-   ## below installs weave networking driver 
+ > **`  ## below installs weave networking driver **
     
    sudo kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')" 
 
-   # Validate:  kubectl get nodes
+  > **` # Validate:  kubectl get nodes**
 ```
 ```
 
-### `Step2: On All Worker Nodes`
+> **`### `Step2: On All Worker Nodes`**
 
 ```
 ```
-## Install Docker
+> **`## Install Docker**
 
 sudo wget https://raw.githubusercontent.com/lerndevops/labs/master/scripts/installDocker.sh -P /tmp
 sudo chmod 755 /tmp/installDocker.sh
@@ -185,14 +185,14 @@ sudo bash /tmp/installDocker.sh
 sudo systemctl restart docker
 ```
 ```
-## Install kubeadm,kubelet,kubectl
+> **`## Install kubeadm,kubelet,kubectl**
 
 sudo wget https://raw.githubusercontent.com/lerndevops/labs/master/scripts/installK8S-v1-23.sh -P /tmp
 sudo chmod 755 /tmp/installK8S-v1-23.sh
 sudo bash /tmp/installK8S-v1-23.sh
 ```
 ```
-## Run Below on Master Node to get join token 
+> **`## Run Below on Master Node to get join token **
 
 kubeadm token create --print-join-command 
 
