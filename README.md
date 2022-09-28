@@ -40,9 +40,9 @@ sudo bash /tmp/installDocker.sh
 sudo wget https://raw.githubusercontent.com/lerndevops/labs/master/scripts/installAnsible.sh -P /tmp
 sudo chmod 755 /tmp/installAnsible.sh
 sudo bash /tmp/installAnsible.sh
-
+```
 ![Snapshot](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/6_ansible_install.PNG)
-
+```
 # modify the ansible config file to ensure disable host key checking 
 
 vi /etc/ansible/ansible.cfg 
