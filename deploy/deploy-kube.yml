@@ -22,7 +22,7 @@
             kubectl expose deployment eduproj --name eduproj --type NodePort --port 80 --target-port 8080
          fi
     - name: increase replicas 
-      shell: kubectl scale deploy eduproj --replicas=2
+      shell: kubectl scale deploy eduproj --replicas=5
       
     #- name: deploy app
     #  shell: kubectl create deployment eduproj --image=irfanhaneefcl/edureka_project2:{{ build }}
