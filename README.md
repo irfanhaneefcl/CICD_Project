@@ -3,9 +3,10 @@
 ## Step1 -- `Pre-Requisite`
 
 ```
-      Create a VM (on any cloud OR Virtual Box) with 1CPU 2GB RAM
+      Create a VM (on any cloud OR Virtual Box) with 1CPU 2GB RAM a
 
       login to the VM Install below tools
+      
 ```
 ![CICD-JPAC](https://github.com/lerndevops/labs/blob/master/cicd-flow/CICD-JPAC.png)
 
