@@ -8,7 +8,7 @@
       login to the VM Install below tools
       
 ```
-![CICD-JPAC](https://github.com/lerndevops/labs/blob/master/cicd-flow/CICD-JPAC.png)
+![VM-Conroller](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/1_jenkins_vm.PNG)
 
 ## Step2 -- `Install Java & Jenkins`
 ```
@@ -460,5 +460,5 @@ PLAY RECAP *********************************************************************
 Finished: SUCCESS
 ```
 
-#![CICD-JPAC](https://github.com/irfanhaneefcl/edureka_project2/tree/master/snapshots/1_jenkins_vm.PNG)
+![](https://github.com/irfanhaneefcl/edureka_project2/blob/master/snapshots/30_application_view_in_browser.PNG)
 
