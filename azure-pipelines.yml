@@ -16,9 +16,7 @@ steps:
     options: '-Xmx3072m'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals:
-    - 'clean'
-    - 'install'
+    goals: 'clean install'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(System.DefaultWorkingDirectory)/target'
