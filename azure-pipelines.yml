@@ -1,7 +1,7 @@
 # This pipeline will build a Maven Java project and publish the build artifacts to Azure Pipelines.
 
 trigger:
-- main
+- master
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -17,7 +17,9 @@ steps:
     options: '-Xmx3072m clean install'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'clean install'
+    goals: 
+      - 'clean'
+      - 'install'
 
 - task: PublishBuildArtifacts@1
   inputs:
