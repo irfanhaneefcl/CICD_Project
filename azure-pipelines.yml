@@ -25,4 +25,3 @@ steps:
   inputs:
     PathtoPublish: '$(System.DefaultWorkingDirectory)/target'
     ArtifactName: 'my-devops-project'
-    
