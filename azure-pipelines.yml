@@ -17,8 +17,8 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals:
-      - 'clean'
-      - 'install'
+    - 'clean'
+    - 'install'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(System.DefaultWorkingDirectory)/target'
