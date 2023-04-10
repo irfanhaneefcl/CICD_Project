@@ -4,22 +4,22 @@ trigger:
 - main
 
 pool:
- - vmImage: 'ubuntu-latest'
+  vmImage: 'ubuntu-latest'
 
 steps:
-  - task: MavenAuthenticate@0
-    inputs:
-      mavenServiceConnections: 'Devops_Sample_Irfan_Maven'
-  - task: Maven@3
-    inputs:
-      -mavenPomFile: './pom.xml'
-      -options: '-Xmx3072m'
-      -publishJUnitResults: true
-      -testResultsFiles: '**/surefire-reports/TEST-*.xml'
-     - goals:
-        - 'clean'
-        - 'install'
-  - task: PublishBuildArtifacts@1
-    -inputs:
-      -PathtoPublish: '$(System.DefaultWorkingDirectory)/target'
-      -ArtifactName: 'my-devops-project'
+- task: MavenAuthenticate@0
+  inputs:
+    mavenServiceConnections: 'Devops_Sample_Irfan_Maven'
+- task: Maven@3
+  inputs:
+    mavenPomFile: './pom.xml'
+    options: '-Xmx3072m'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    goals:
+      - 'clean'
+      - 'install'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(System.DefaultWorkingDirectory)/target'
+    ArtifactName: 'my-devops-project'
