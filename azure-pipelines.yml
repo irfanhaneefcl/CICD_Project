@@ -13,7 +13,7 @@ steps:
 
 - task: Maven@3
   inputs:
-    mavenPomFile: 'Devops_Sample_Irfan/pom.xml'
+    mavenPomFile: 'pom.xml'
     options: '-Xmx3072m'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
