@@ -14,10 +14,10 @@ steps:
 - task: Maven@3
   inputs:
     mavenPomFile: './pom.xml'
-    options: '-Xmx3072m clean install'
+    options: '-Xmx3072m'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 
+    goals:
       - 'clean'
       - 'install'
 
@@ -25,3 +25,4 @@ steps:
   inputs:
     PathtoPublish: '$(System.DefaultWorkingDirectory)/target'
     ArtifactName: 'my-devops-project'
+    
