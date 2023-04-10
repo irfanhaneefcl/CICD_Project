@@ -9,7 +9,7 @@ pool:
 steps:
 - task: MavenAuthenticate@0
   inputs:
-    mavenServiceConnections: 'GitHub connection 1'
+    mavenServiceConnections: 'Devops_Sample_Irfan_Maven'
 
 - task: Maven@3
   inputs:
