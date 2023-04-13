@@ -1,7 +1,7 @@
 # Pipeline YAML file for Java Spring Boot application with SonarQube check and deployment to OpenShift
 
 trigger:
-- develop
+- master
 
 stages:
 - stage: Build
