@@ -1,7 +1,17 @@
-# Pipeline YAML file for Java Spring Boot application with SonarQube check and deployment to OpenShift
+# Pipeline YAML file for Java Spring Boot application with deployment to OpenShift
 
 trigger:
-- master
+- develop
+
+variables:
+  # Docker Hub registry credentials
+  dockerRegistry: $(DOCKER_REGISTRY)
+  dockerRegistryUsername: $(DOCKER_USERNAME)
+  dockerRegistryPassword: $(DOCKER_PASSWORD)
+  # Artifacts feed name
+  artifactsFeeds: eduproj
+  # Docker image information
+  dockerImageName: Irfan-sample
 
 stages:
 - stage: Build
@@ -27,6 +37,7 @@ stages:
         goals: 'clean package'
         publishJUnitResults: true
         testResultsFiles: '**/TEST-*.xml''**/surefire-reports/TEST-*.xml'
+
 - stage: DockerBuild
   displayName: Docker build stage
   jobs:
@@ -37,7 +48,7 @@ stages:
     steps:
     - task: Docker@2
       inputs:
-        containerRegistry: 'Docker Hub'
+        containerRegistry: 'irfan-test' # Replace with the name of your Docker Hub service connection
         repository: $(dockerRegistry)$(dockerImageName)
         command: 'build'
         Dockerfile: '**/Dockerfile'
@@ -45,7 +56,7 @@ stages:
           $(Build.BuildId)
     - task: Docker@2
       inputs:
-        containerRegistry: 'Docker Hub'
+        containerRegistry: 'irfan-test' # Replace with the name of your Docker Hub service connection
         repository: $(dockerRegistry)$(dockerImageName)
         command: 'push'
         Dockerfile: '**/Dockerfile'
