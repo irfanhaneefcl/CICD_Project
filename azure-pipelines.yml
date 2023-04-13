@@ -1,7 +1,7 @@
 # Pipeline YAML file for Java Spring Boot application with deployment to OpenShift
 
 trigger:
-- master
+- develop
 
 variables:
   # Docker Hub registry credentials
@@ -27,6 +27,8 @@ stages:
       inputs:
         versionSpec: '11.x'
         jdkArchitecture: 'x64'
+        jdkArchitectureOption: 'x64'
+
     - task: MavenAuthenticate@0
       inputs:
         artifactsFeeds: $(artifactsFeeds)
@@ -64,3 +66,38 @@ stages:
           $(Build.BuildId)
         containerUsername: $(dockerRegistryUsername)
         containerPassword: $(dockerRegistryPassword)
+
+- stage: Deploy
+  displayName: Deploy stage
+  jobs:
+  - job: DeployJob
+    displayName: Deploy job
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: Kubernetes@1
+      inputs:
+        connectionType: 'Kubernetes Service Connection'
+        kubernetesServiceConnection: '<KUBERNETES_SERVICE_CONNECTION_NAME>'
+        namespace: '<NAMESPACE>'
+        command: 'apply'
+        useConfigurationFile: true
+        configurationType: 'inline'
+        inline: |
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: Irfan-sample
+          spec:
+            replicas: 1
+            selector:
+              matchLabels:
+                app: Irfan-sample
+            template:
+              metadata:
+                labels:
+                  app: Irfan-sample
+              spec:
+                containers:
+                - name: Irfan-sample
+                  image: $(dockerRegistry)$(dockerImageName):$(Build.Build
