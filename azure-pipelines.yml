@@ -1,7 +1,5 @@
-# Pipeline YAML file for Java Spring Boot application with deployment to OpenShift
-
 trigger:
-- develop
+- master
 
 variables:
   # Docker Hub registry credentials
@@ -23,13 +21,6 @@ stages:
       vmImage: 'ubuntu-latest'
     steps:
     - checkout: self
-    - task: JavaToolInstaller@0
-      inputs:
-        versionSpec: '11.x'
-        jdkArchitecture: 'x64'
-        jdkArchitectureOption: 'x64'
-        jdkSourceOption: 'Microsoft'
-
     - task: MavenAuthenticate@0
       inputs:
         artifactsFeeds: $(artifactsFeeds)
