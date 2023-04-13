@@ -40,19 +40,6 @@ stages:
         goals: 'clean package'
         publishJUnitResults: true
         testResultsFiles: '**/TEST-*.xml''**/surefire-reports/TEST-*.xml'
-    - task: SonarQubePrepare@4
-      inputs:
-        SonarQube: 'SonarQube'
-        scannerMode: 'CLI'
-        configMode: 'file'
-        cliProjectKey: $(sonarqubeProjectKey)
-        cliProjectName: $(sonarqubeProjectName)
-        cliSources: 'src'
-    - task: SonarQubeAnalyze@4
-    - task: SonarQubePublish@4
-      inputs:
-        pollingTimeoutSec: '300'
-
 - stage: DockerBuild
   displayName: Docker build stage
   jobs:
