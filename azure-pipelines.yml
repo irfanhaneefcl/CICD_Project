@@ -1,22 +1,83 @@
-# This pipeline will build a Maven Java project and publish the build artifacts to Azure Pipelines.
+# Pipeline YAML file for Java Spring Boot application with SonarQube check and deployment to OpenShift
 
 trigger:
-- main
+- develop
 
-pool:
-  vmImage: 'ubuntu-latest'
+variables:
+  # Docker Hub registry credentials
+  dockerRegistry: https://registry.hub.docker.com/irfanhaneefcl/qortex-test
+  dockerRegistryUsername: irfanhaneefcl
+  dockerRegistryPassword: dckr_pat_e8aVppS5nDArDUYBRw4NU01a9AY
+  # Artifacts feed name
+  artifactsFeeds: eduproj
+  # SonarQube project information
+  sonarqubeProjectKey: db2string_identity-access-management-service
+  sonarqubeProjectName: security-service
+  # Docker image information
+  dockerImageName: Irfan-sample
 
-steps:
-- task: MavenAuthenticate@0
-  inputs:
-    mavenServiceConnections: 'Devops_Sample_Irfan_Maven'
-- task: Maven@3
-  inputs:
-    mavenPomFile: './pom.xml'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'install'
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(System.DefaultWorkingDirectory)/target'
-    ArtifactName: 'my-devops-project'
+stages:
+- stage: Build
+  displayName: Build stage
+  jobs:
+  - job: BuildJob
+    displayName: Build job
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - checkout: self
+    - task: JavaToolInstaller@0
+      inputs:
+        versionSpec: '11.x'
+        jdkArchitecture: 'x64'
+    - task: MavenAuthenticate@0
+      inputs:
+        artifactsFeeds: $(artifactsFeeds)
+    - task: Maven@3
+      inputs:
+        mavenPomFile: 'pom.xml'
+        options: '-B'
+        goals: 'clean package'
+        publishJUnitResults: true
+        testResultsFiles: '**/TEST-*.xml''**/surefire-reports/TEST-*.xml'
+    - task: SonarQubePrepare@4
+      inputs:
+        SonarQube: 'SonarQube'
+        scannerMode: 'CLI'
+        configMode: 'file'
+        cliProjectKey: $(sonarqubeProjectKey)
+        cliProjectName: $(sonarqubeProjectName)
+        cliSources: 'src'
+    - task: SonarQubeAnalyze@4
+    - task: SonarQubePublish@4
+      inputs:
+        pollingTimeoutSec: '300'
+
+- stage: DockerBuild
+  displayName: Docker build stage
+  jobs:
+  - job: DockerBuildJob
+    displayName: Docker build job
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'Docker Hub'
+        repository: $(dockerRegistry)$(dockerImageName)
+        command: 'build'
+        Dockerfile: '**/Dockerfile'
+        tags: |
+          $(Build.BuildId)
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'Docker Hub'
+        repository: $(dockerRegistry)$(dockerImageName)
+        command: 'push'
+        Dockerfile: '**/Dockerfile'
+        tags: |
+          $(Build.BuildId)
+        containerUsername: $(dockerRegistryUsername)
+        containerPassword: $(dockerRegistryPassword)
+
+       
