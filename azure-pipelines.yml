@@ -1,7 +1,7 @@
 # Pipeline YAML file for Java Spring Boot application with deployment to OpenShift
 
 trigger:
-- develop
+- master
 
 variables:
   # Docker Hub registry credentials
@@ -48,7 +48,7 @@ stages:
     steps:
     - task: Docker@2
       inputs:
-        containerRegistry: 'irfan-test' # Replace with the name of your Docker Hub service connection
+        containerRegistry: 'docker-test' # Replace with the name of your Docker Hub service connection
         repository: $(dockerRegistry)$(dockerImageName)
         command: 'build'
         Dockerfile: '**/Dockerfile'
@@ -56,7 +56,7 @@ stages:
           $(Build.BuildId)
     - task: Docker@2
       inputs:
-        containerRegistry: 'irfan-test' # Replace with the name of your Docker Hub service connection
+        containerRegistry: 'docker-test' # Replace with the name of your Docker Hub service connection
         repository: $(dockerRegistry)$(dockerImageName)
         command: 'push'
         Dockerfile: '**/Dockerfile'
