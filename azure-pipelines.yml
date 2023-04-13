@@ -51,7 +51,7 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'docker-test' # Replace with the name of your Docker Hub service connection
-        repository: $(dockerRegistry)$(dockerImageName)
+        repository: irfanhaneefcl
         command: 'push'
         Dockerfile: '**/Dockerfile'
         tags: |
