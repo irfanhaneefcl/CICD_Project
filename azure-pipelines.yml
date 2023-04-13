@@ -3,7 +3,7 @@ trigger:
 
 variables:
   # Docker Hub registry credentials
-  dockerRegistry: $(DOCKER_REGISTRY)
+  dockerRegistry: $(DOCKER_REGISTRY)/irfanhaneefcl
   dockerRegistryUsername: $(DOCKER_USERNAME)
   dockerRegistryPassword: $(DOCKER_PASSWORD)
   # Artifacts feed name
@@ -43,7 +43,7 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'docker-test' # Replace with the name of your Docker Hub service connection
-        repository: $(DOCKER_REGISTRY)$(dockerImageName)
+        repository: $(dockerRegistry)$(dockerImageName)
         command: 'build'
         Dockerfile: '**/Dockerfile'
         tags: |
