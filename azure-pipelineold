@@ -1,0 +1,22 @@
+# This pipeline will build a Maven Java project and publish the build artifacts to Azure Pipelines.
+
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: MavenAuthenticate@0
+  inputs:
+    mavenServiceConnections: 'Devops_Sample_Irfan_Maven'
+- task: Maven@3
+  inputs:
+    mavenPomFile: './pom.xml'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    goals: 'install'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(System.DefaultWorkingDirectory)/target'
+    ArtifactName: 'my-devops-project'
