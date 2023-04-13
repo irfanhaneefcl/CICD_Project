@@ -3,7 +3,7 @@ trigger:
 
 variables:
   # Docker Hub registry credentials
-  dockerRegistry: $(DOCKER_REGISTRY)/irfanhaneefcl
+  dockerRegistry:irfanhaneefcl/
   dockerRegistryUsername: $(DOCKER_USERNAME)
   dockerRegistryPassword: $(DOCKER_PASSWORD)
   # Artifacts feed name
