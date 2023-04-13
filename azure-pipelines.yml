@@ -3,19 +3,6 @@
 trigger:
 - develop
 
-variables:
-  # Docker Hub registry credentials
-  dockerRegistry: https://registry.hub.docker.com/irfanhaneefcl/qortex-test
-  dockerRegistryUsername: irfanhaneefcl
-  dockerRegistryPassword: dckr_pat_e8aVppS5nDArDUYBRw4NU01a9AY
-  # Artifacts feed name
-  artifactsFeeds: eduproj
-  # SonarQube project information
-  sonarqubeProjectKey: db2string_identity-access-management-service
-  sonarqubeProjectName: security-service
-  # Docker image information
-  dockerImageName: Irfan-sample
-
 stages:
 - stage: Build
   displayName: Build stage
