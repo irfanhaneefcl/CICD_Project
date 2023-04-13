@@ -9,7 +9,7 @@ variables:
   # Artifacts feed name
   artifactsFeeds: eduproj
   # Docker image information
-  dockerImageName: Irfan-sample
+  dockerImageName: irfansample
 
 stages:
 - stage: Build
